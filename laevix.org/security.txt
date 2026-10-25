@@ -1,0 +1,15 @@
+# Security.txt - Security Policy for Laevix
+# https://securitytxt.org/
+
+Contact: mailto:security@laevix.org
+Expires: 2027-01-13T00:00:00.000Z
+Encryption: https://www.laevix.org/pgp-key.txt
+Preferred-Languages: en, ne
+Canonical: https://www.laevix.org/.well-known/security.txt
+Policy: https://www.laevix.org/security-policy
+Hiring: https://www.laevix.org/careers
+
+# Company Information
+# Laevix - AI Tech Company Nepal
+# Website Development & AI Solutions
+# Kathmandu, Nepal

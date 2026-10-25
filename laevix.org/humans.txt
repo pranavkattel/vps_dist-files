@@ -1,0 +1,46 @@
+# Humans.txt - The Humans Behind Laevix
+
+/* TEAM */
+Company: Laevix
+Location: Kathmandu, Nepal
+Website: https://www.laevix.org
+Contact: info@laevix.org
+
+/* SITE */
+Last update: 2026/01/13
+Standards: HTML5, CSS3, JavaScript ES6+, React, TypeScript
+Components: React, Vite, TailwindCSS, Framer Motion, Shadcn UI
+Software: VS Code, Git, Figma, Adobe Creative Suite
+Language: English, Nepali
+
+/* SERVICES */
+Website Development
+AI Solutions & AI Agents
+Custom Software Development
+Business Automation
+Digital Transformation
+Mobile App Development
+Cloud Solutions
+SEO Services
+
+/* LOCATION */
+City: Kathmandu
+Region: Bagmati Province
+Country: Nepal
+Coordinates: 27.7172° N, 85.3240° E
+
+/* KEYWORDS */
+AI tech company Nepal, website making company Nepal, web development Kathmandu, 
+AI solutions Nepal, custom software development, business automation Nepal,
+digital transformation, website design Nepal, AI agents Nepal, tech company Kathmandu
+
+/* THANKS */
+To all our clients and partners who trust us with their digital transformation.
+To the open-source community for amazing tools and libraries.
+To Nepal's growing tech ecosystem.
+
+/* SOCIAL */
+Instagram: https://www.instagram.com/laevix
+LinkedIn: https://www.linkedin.com/company/laevix
+Twitter: https://twitter.com/laevix
+Facebook: https://www.facebook.com/laevix

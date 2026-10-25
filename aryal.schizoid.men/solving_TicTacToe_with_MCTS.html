@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>solving_TicTacToe_with_MCTS</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .dead-link {
+            color: #cc0000;
+            font-style: italic;
+        }
+
+        .missing-image {
+            color: #cc6600;
+            font-style: italic;
+            background-color: #fff3cd;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .math-inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="/">Home</a></nav>
+    <main>
+        <h1 id="solving-tictactoe-with-mcts">solving TicTacToe with MCTS</h1>
+<p>This is a simple guide on implementing MCTS for a simple MCTS perfect game like TICTACTOE. </p>
+<p>First you need to represent the game in data structure</p>
+<div class="codehilite"><pre><span></span><code><span class="n">board</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+         <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+         <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+<p>We store 0 as empty, 1 as X and -1 as O, so 1 is player X and -1 is player O</p>
+<p>You need helper functions,</p>
+<ul>
+<li>legal_moves (a list of possible moves)</li>
+<li>make_move (append the move in the board list if it is legal and switch turns)</li>
+<li>check_winner (need to check if a player has a win condition)</li>
+</ul>
+<p>Game implementation needs to be correct for MCTS to work</p>
+<h2 id="mcts-implementation">MCTS implementation</h2>
+<p>you will need to:</p>
+<ul>
+<li>
+<p>define a node structure, each node represents a game state, it includes </p>
+<ul>
+<li>the board</li>
+<li>player to move</li>
+<li>parent node</li>
+<li>children nodes</li>
+<li>previous move </li>
+<li>list of legal moves in this state</li>
+<li>visits to the node</li>
+<li>reward value of the node</li>
+</ul>
+</li>
+</ul>
+<p>Now you need to implement the UCT formula, which is the upper confidence bound also called <span class="dead-link">Thompson sampling</span> applied to a tree. </p>
+<p>For any given child node, the formula is stated as follows </p>
+<p><div class="math-block">\[UCT = \frac{Q}{N} + c\sqrt{\frac{ln{N_p}}{N}}\]</div><br />
+Where, <br />
+Q is the total reward accumulated at this node <br />
+N is the number of time the node was visited <br />
+<span class="math-inline">\(N_p\)</span> the number of time parent node was visited <br />
+c is an exploration constant, by convention it is usually <span class="math-inline">\(\sqrt{2}\)</span></p>
+<p>The first term is the average reward, the second term is a measure of how much this node has been explored.  As N is inversely square root proportional </p>
+<ul>
+<li>the UCT value returns more bonus if N is small</li>
+<li>if N is large the UCT value returns less bonus<br />
+This ensures that moves which haven't been tried, will get a priority. </li>
+</ul>
+<p>The reason why <span class="math-inline">\(\sqrt{2}\)</span> is set as convention is because it is derived from the bandit regret bounds (UCB1), for all we care this constant controls the risk, if its large, it will explore more, if small it will be greedy and go for risky exploitations</p>
+<p>This can be represented in code as </p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">uct</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">child</span><span class="o">.</span><span class="n">visits</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">c</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">child</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">visits</span><span class="p">)</span> <span class="o">/</span> <span class="n">child</span><span class="o">.</span><span class="n">visits</span><span class="p">)</span>
+</code></pre></div>
+
+<p>child is an object of the node class which we defined earlier, with key attributes value and visits. </p>
+<p>The goal now is to select the best child node from a current node. As said earlier, the node represents the game state, which encodes board, player to move and other information. From the current node we branch into children nodes, for each valid move from the current state, there will be a child node. And among those child nodes we need to figure out which to select based on the reward computed by the uct.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="c1"># untried moves define the child nodes </span>
+    <span class="k">while</span> <span class="n">node</span><span class="o">.</span><span class="n">untried_moves</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="c1"># find the node with the maximum uct</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">children</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">uct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">node</span>
+</code></pre></div>
+
+<p>To define a child node is to create a new Node with the untried moves, it can be defined as the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">def</span><span class="w"> </span><span class="nx">expand</span><span class="p">(</span><span class="nx">node</span><span class="p">):</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">pick</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">random</span><span class="w"> </span><span class="nx">untried</span><span class="w"> </span><span class="nx">move</span>
+<span class="w">    </span><span class="nx">move</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">random</span><span class="p">.</span><span class="kd">choice</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">untried_moves</span><span class="p">)</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">remove</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">untried</span><span class="w"> </span><span class="nx">moves</span>
+<span class="w">    </span><span class="nx">node</span><span class="p">.</span><span class="nx">untried_moves</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">move</span><span class="p">)</span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">define</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">board</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">board</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">move</span>
+<span class="w">    </span><span class="nx">new_board</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">make_move</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">board</span><span class="p">,</span><span class="w"> </span><span class="nx">move</span><span class="p">,</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">player</span><span class="p">)</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="nx">now</span>
+<span class="w">    </span><span class="nx">child</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Node</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">board</span><span class="p">=</span><span class="nx">new_board</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">player</span><span class="p">=</span><span class="o">-</span><span class="nx">node</span><span class="p">.</span><span class="nx">player</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">parent</span><span class="p">=</span><span class="nx">node</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">move</span><span class="p">=</span><span class="nx">move</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="nx">append</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">child</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">node</span>
+<span class="w">    </span><span class="nx">node</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">child</span>
+</code></pre></div>
+
+<p>Now we need to setup the environment to simulate a game, it is a function of the board and player which randomly makes legal moves and returns the winner. Its a simple function where you keep iterating with random moves until <code>check_winner()</code> returns true for a given board.  </p>
+<p>The next step is to backpropagate, this becomes insanely simple as we defined X as 1 and O as -1, with draw being 0, so we can simply do the following</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">backprop</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">visits</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">node</span><span class="o">.</span><span class="n">player</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span>
+</code></pre></div>
+
+<p>This means for each node we get a value that accumulates how many times this node was in a winning or losing sequence </p>
+<p>Now we just need to iterate by this just expanding the node, simulating with random moves, and backpropagating to update the tree, for many iterations, we just pick the child node with the maximum visits</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">best_move</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">children</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">visits</span><span class="p">)</span><span class="o">.</span><span class="n">move</span>
+</code></pre></div>
+
+<p>Now the agent can be simply structured a:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mcts_move</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+        <span class="n">mcts_iterate</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">best_move</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</code></pre></div>
+
+<p>To check if the implementation, just make it play against itself, since TICTACTOE is mcts perfect, it should always result in a draw. </p>
+    </main>
+    <footer>
+        <hr>
+        <p><small>Generated from an Obsidian vault</small></p>
+    </footer>
+</body>
+</html>

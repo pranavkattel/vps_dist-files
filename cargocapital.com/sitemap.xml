@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Homepage - Highest Priority - Cargo Company Nepal -->
+  <url>
+    <loc>https://cargocapital.com/</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Services - High Priority - Logistics Services Nepal -->
+  <url>
+    <loc>https://cargocapital.com/services</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- About - Important for Trust - Best Cargo Company Nepal -->
+  <url>
+    <loc>https://cargocapital.com/about</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Quote - Conversion Page - Cargo Quote Nepal -->
+  <url>
+    <loc>https://cargocapital.com/quote</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Tracking - User Tool - Cargo Tracking Nepal -->
+  <url>
+    <loc>https://cargocapital.com/tracking</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact - Contact Cargo Company Nepal -->
+  <url>
+    <loc>https://cargocapital.com/contact</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- FAQ - SEO Value - Cargo FAQ Nepal -->
+  <url>
+    <loc>https://cargocapital.com/faq</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Blog - Content Marketing - Cargo News Nepal -->
+  <url>
+    <loc>https://cargocapital.com/blog</loc>
+    <lastmod>2025-12-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

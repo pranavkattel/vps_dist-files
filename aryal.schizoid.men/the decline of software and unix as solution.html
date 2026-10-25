@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the decline of software and unix as solution</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .dead-link {
+            color: #cc0000;
+            font-style: italic;
+        }
+        
+        .missing-image {
+            color: #cc6600;
+            font-style: italic;
+            background-color: #fff3cd;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .math-inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="/">Home</a></nav>
+    <main>
+        <h1 id="the-decline-of-software-and-unix-as-solution">the decline of software and unix as solution</h1>
+<p><a href="https://youtu.be/8orjs4WqnoU">Is the Golden Age of Software Over? - pacarana abel cirilo</a></p>
+<p><em>started 2024-3-13 finished 2024-10-17:</em></p>
+<p>From websites downloading 10 megabytes of Javascript just to do something simple to Video Games handholding you through the entire first stage of the game taking away the aspect of exploration and fear, to the Windows desktop UI being just a webapp running on edge to Youtube making UI changes that no one asked for and not reverting back even after a backlash, to Github being spammed with stupid pull requests just to fuel the job market rat race, and to everything being unnecessarily complex, all these sum up exactly what is wrong with the state of software development.</p>
+<p>Adding layers on top of layers and creating a new problem to patch an old problem instead of solving the original problem is the norm. Sometimes you need to ask yourself, do I really need this much complexity in my program? do I really need to depend on all these external packages? Its bizzare to me, when I visit some these "professional websites", it feels so unreal that there was a developer out there who looked at this mess of a website, which takes multiple seconds to just load said, "Yeah this looks good, PUSH!". It is not just web developers, desktop software developers and game developers also have been constantly shipping out unusable trash. It is funny that almost every good(comfy, fast and functional) software I use is mostly being developed and maintianed by hobby programmers or programmers who maintain it as a side projects for free, thanklessly, FOR YEARS! What could possibly be the reason that hobbyist developers and developers who dont expect anything in return manage to create some of the best software that exists but well paid developers create some of the worst software known to man?</p>
+<h2 id="companies-know-this-secret-and-they-exploit-it">companies know this secret and they exploit it!</h2>
+<p>Over the years I've seen Google make some unreasonably bad decisions like removing dislikes and updating the UI, many complained! yet Google didnt listen, and everyone still kept using their service. This proves that no matter how much of a garbage product they ship, everyone will still be using it! Your average person obviously does not know about the alternatives or even the implications! Google knows this! and so does everyone else, why hasnt everyone moved away from Windows despite it being objectively bad for the average computer user who just needs a web browser? everyone knows its a botnet, everyone knows it does not respect your freedom(do they?) yet Windows still has a big market share because people do NOT care, most people are willing to be toyed with, they are fine as long as they can watch their youtube videos and post on facebook. Large companies understand this, so they do NOT put any effort in the quality of their software. This is not supposed to be a jab at Google or Microsoft because of their freedom and privacy violations, it is still possible to develop high quality software even if you are going abuse the user's freedom, so why dont they? its because it does not matter. Turns out most people just dont care.</p>
+<h2 id="pokemon-and-legend-of-zelda-my-experience">Pokemon and Legend of Zelda, my experience</h2>
+<p>I've enjoyed Pokemon and Legend of Zelda games my entire life, it started with Pokemon Emerald and Zelda Minish Cap on the GameBoyAdvanced. I used to spend entire nights trying to find hidden entrances, talking to every single NPC and enjoy the game as much as I could. These games gave very little "tutorial", you had to explore and learn the game through trial and error. I very much loved this aspect of gaming, yes it was frustrating, if you got stuck you had almost nothing to help you other than maybe your friend who beat the game before you. Fast forward to the 3DS, the games feels much more eaiser, Caves and Forests arent as scary as they used to be, grinding and leveling up before gym bosses became optional because of the stupid EXP share change they made. What about the newer Zelda games? instead of them just dropping me into the map and letting me explore the world and learn its lore, they spoonfeed it to me, this trend of making video games easier is something I am not a fan of, and even <a href="https://youtu.be/zMWy8GYvhrY">Jonathan Blow points out something similar in this talk</a>. But what does this have to do with the decline in software?</p>
+<h2 id="because-people-who-care-are-the-minority">because people who care, are the minority</h2>
+<p>Why are video games getting easier? so that you can target a wider audience! Why do these software development companies ignore complains regarding quality of their software? the actual target audience does not care and will use any garbage piece of software they are given, so why bother?</p>
+<h2 id="quick-question-do-most-developers-understand-how-a-computer-works">quick question, do most developers understand how a computer works?</h2>
+<p>Developers who write high level software which runs on top of abstractions upon abstractions probably dont even understand basic computer concepts like registers, memory management, threading, mutexes and all that jazz. When you are that high up in the development sphere, you dont even know what is happening down at the lower levels because it wont be of any help for your high level software built on top of a Javascript framework which is built on top of even more Javascript frameworks. Its easy to point the finger at these developers, but can you blame them? they are told leetcode grinding will make them a better software developers and installing a million different npm packages with a dozen bloat vscode plugin is the best way to go.</p>
+<blockquote>
+<p><em>"The worst part is, it’s not just the performance of our programs that is suffering, it’s also our way of thinking — this npm install culture is actually destroying our ability to think rationally about what we’re building."</em><br />
+— <a href="https://vladh.net/manifesto/">vladh's manifesto</a></p>
+</blockquote>
+<h2 id="the-rat-race-to-get-a-job">the rat race to get a job</h2>
+<p>There is an entire group of people out there who think "Open Source" is something you do to build up your resume or C.V so that you get a decent job. It frankly annoys me that there is this productive community out there doing wonderful things, and what do these people see it as? IF ME MAKE PULL REQUEST ME GET JOB. Many of us in this sphere are writing, developing and maintianing software that we care about and love. Many of us are doing it as a hobby, a few of us get paid but it is mostly a sphere of hackers, some talented, some not, sharing their work, out of pure passion for the art, so where does does the idea that forcing yourself contribute to freesoftware projects gets you a job come from? This forced meme needs to die.</p>
+<h2 id="partial-solution">partial solution</h2>
+<p>A simple solution for this fiasco is to just better educate these developers, maybe introduce them to freesoftware, GNU and its history instead of teaching them how to make a time-wasting pull request to a project? Maybe actually let them know theres much more to computers than just npm install solution? Maybe focus on teaching software design principle like the UNIX ideal instead of having them grind leetcode? Maybe introduce them to a small and simple development enivronment like POSIX? surely once these developers see just how simple and small a program can be and how powerful your workflow can be without installing 12 different vscode plugins, maybe, just maybe they will feel inspired to write better software!</p>
+<h2 id="but-im-on-gnulinux-my-software-is-well-crafted-and-of-high-quality">but im on GNU/Linux! my software is well crafted and of high quality!</h2>
+<p>Is it really? We need to evaluate how we make use of our computer. I for one do very little with my computer, to be exact, I write programs, read books and papers, watch anime, talk with my friends, use social media, check emails, check my RSS feed, play some simple video games and thats about it.</p>
+<h3 id="a-list-of-programs-my-workflow-is-dependent-on">A list of programs my workflow is dependent on:</h3>
+<ul>
+<li>a text editor  </li>
+<li>a compiler toolchain  </li>
+<li>a video player and a filesharing program  </li>
+<li>an instant messaging program  </li>
+<li>a web browser for social media, wikis and weblogs  </li>
+<li>a pdf viewer  </li>
+<li>an email/rss client  </li>
+<li>a fun video game  </li>
+<li>an operating system which can handle everything mentioned above on my hardware  </li>
+</ul>
+<p>For the text editor I use emacs, for the compiler toolchain I use GNU buildutils, compiler collection and binutils. For video and filesharing I use mpv and qbittorent, for IMs I use weechat and firefox(discord, matrix), for web browsing I use firefox, for PDFs and ePUBs I use zathura, for email and rss I use thunderbird, which is just firefox in disguise. The only video game I've played recently is Touhou(actually Taisei). But I seriously do need to ask this question, is this not too much?</p>
+<p>All of these programs do a lot of things, to a point where I have 3 different MASSIVE programs I can use just for email (emacs, firefox webmail, thunderbird). Is this a good thing? NO! the UNIX philosophy says do ONE thing and ONE thing well. Again, 4 different software for instant messaging(irc, emacs, firefox, thunderbird), is this truly how we should be using our computers?</p>
+<h2 id="the-xz-backdoor-and-linuxs-fragmented-ecosystem">the xz backdoor and linux's fragmented ecosystem</h2>
+<p>The Linux eco-system is HUGE but also all over the place and this incident made me question, do I need all this software in my system? I did some research and I figured I could comfortably move my workflow to a BSD, and BSD systems are much smaller! If a BSD has a smaller and a simpler ecosystem and my Linux workflow can be ported to a BSD, what benefit do I get by being part of a large ecosystem of software instead of something much smaller.</p>
+<p>User <a href="https://hj.9fs.net/moody/p/1711735036.770638">moody@hj.9fs.net</a> put it very nicely:</p>
+<blockquote>
+<p><em>"My thoughts on this xz/liblzma stuff is that we're reaching a boiling point where no one checks anything. Until we make simpler systems with less moving parts this will continue to happen".</em></p>
+</blockquote>
+<h2 id="so-you-are-saying-cat-v-was-right-this-whole-time-and-we-didnt-listen">so you are saying cat-v was right this whole time and we didnt listen?</h2>
+<p>Many of us might ignore cat-v's suggestions and harmful listings as some of them just sound absurd and unresonable, why would anyone use tcc over gcc? how does using a sub-optimal compiler, which can only target a fraction of systems that gcc can, help us to make software better?</p>
+<h2 id="convenience-maybe">convenience, maybe?</h2>
+<p>Even after acknowledging that my current workflow could be done with a much smaller set of software, I still dont want to give up all the personalized modes I have written for emacs and move on to a simpler editor! and I still dont want to give up on thunderbird because of all the neat features I have adapted to, even if its going to leak a shit ton of memory.</p>
+<h2 id="we-have-locked-ourself-with-bad-software">we have locked ourself with bad software</h2>
+<p>Gamers will not chose freedom over their addiction of video games and stick with the Windows operating system, in the same way developers, and mainly project managers, with only profits in mind, will not follow good design principles to develop small, secure and fast programs and will instead develop something that barely works and has a bunch of fancy design bloat at the cost of maintainability, security and performance.</p>
+<h2 id="the-white-night-a-dream">the white night, a dream</h2>
+<p>If I had an infinite amount of time I would write a new text editor, which I could program and configure with an external interpreter engine, which would also neatly work with an independent email client to send patches formatted by git, and both using the same networking and cryptography software instead of having it vendored. And since my RSS feed, email preview, epub reader and my web browser all need some kind of HTML/CSS rendering, I would write program that dealt with this and problem and have the rest of my programs build on top of it, this way I only have one HTML/CSS rendering software to maintain instead of 4.</p>
+<p>But the reality is, this is never going to happen, just like how Nastenka was taken away by her lover, the big corporations have taken away my good software and now I am left to dream, a dream where I have a RISC-V computer, running a libre, secure and compact microkernel where each and every software is modular and does only ONE thing, and where I am able to audit and hack into everything from drivers to high level software with ease.</p>
+    </main>
+    <footer>
+        <hr>
+        <p><small>Generated from an Obsidian vault</small></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const task_controller_1 = require("../controllers/task.controller");
+const contribution_controller_1 = require("../controllers/contribution.controller");
+const category_controller_1 = require("../controllers/category.controller");
+const status_controller_1 = require("../controllers/status.controller");
+const validate_middleware_1 = require("../middleware/validate.middleware");
+const upload_middleware_1 = require("../middleware/upload.middleware");
+const rateLimit_middleware_1 = require("../middleware/rateLimit.middleware");
+const task_validator_1 = require("../validators/task.validator");
+const contribution_validator_1 = require("../validators/contribution.validator");
+const general_validator_1 = require("../validators/general.validator");
+const router = (0, express_1.Router)();
+router.get('/tasks', (0, validate_middleware_1.validateQuery)(task_validator_1.taskQuerySchema), task_controller_1.getTasks);
+router.get('/tasks/:id', (0, validate_middleware_1.validateParams)(task_validator_1.taskIdSchema), task_controller_1.getTaskById);
+router.post('/tasks', rateLimit_middleware_1.taskSubmissionLimiter, rateLimit_middleware_1.uploadLimiter, (0, upload_middleware_1.handleFileUpload)('image'), upload_middleware_1.cleanupOnError, (0, validate_middleware_1.validateBody)(task_validator_1.createTaskSchema), (0, validate_middleware_1.validateFile)(false), task_controller_1.submitTask);
+router.get('/search', rateLimit_middleware_1.searchLimiter, (0, validate_middleware_1.validateQuery)(task_validator_1.searchQuerySchema), task_controller_1.searchTasks);
+router.get('/categories', category_controller_1.getCategories);
+router.post('/contribute/update', rateLimit_middleware_1.contributionLimiter, rateLimit_middleware_1.uploadLimiter, (0, upload_middleware_1.handleFileUpload)('image'), upload_middleware_1.cleanupOnError, (0, validate_middleware_1.validateBody)(contribution_validator_1.createContributionSchema), (0, validate_middleware_1.validateFile)(false), contribution_controller_1.submitUpdate);
+router.get('/check-status', rateLimit_middleware_1.statusCheckLimiter, (0, validate_middleware_1.validateQuery)(general_validator_1.referenceCodeSchema), status_controller_1.checkStatus);
+router.get('/contribution-categories', status_controller_1.getContributionCategories);
+exports.default = router;
+//# sourceMappingURL=public.routes.js.map

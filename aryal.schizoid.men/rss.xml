@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My Blog</title>
+    <link>https://aryal.schizoid.men</link>
+    <description>Latest posts from My Blog</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Jun 2026 19:00:23 GMT</lastBuildDate>
+    <atom:link href="https://aryal.schizoid.men/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>notes_on_feuerbach_and_the_end_of_classica_german_philosophy</title>
+      <link>https://aryal.schizoid.men/notes_on_feuerbach_and_the_end_of_classica_german_philosophy.html</link>
+      <guid>https://aryal.schizoid.men/notes_on_feuerbach_and_the_end_of_classica_german_philosophy.html</guid>
+      <pubDate>Fri, 26 Jun 2026 17:50:16 GMT</pubDate>
+      <description><![CDATA[# Notes on Feuerbach and the End of Classical German Philosophy]]></description>
+    </item>
+    <item>
+      <title>on_bush_and_bjork</title>
+      <link>https://aryal.schizoid.men/on_bush_and_bjork.html</link>
+      <guid>https://aryal.schizoid.men/on_bush_and_bjork.html</guid>
+      <pubDate>Thu, 18 Jun 2026 12:11:35 GMT</pubDate>
+      <description><![CDATA[# On Bush and Bjork *2026-06-18*]]></description>
+    </item>
+    <item>
+      <title>shinny_shapeshifter</title>
+      <link>https://aryal.schizoid.men/shinny_shapeshifter.html</link>
+      <guid>https://aryal.schizoid.men/shinny_shapeshifter.html</guid>
+      <pubDate>Wed, 06 May 2026 13:14:32 GMT</pubDate>
+      <description><![CDATA[# Shinny Shapeshifter *2026-05-04*]]></description>
+    </item>
+    <item>
+      <title>contact</title>
+      <link>https://aryal.schizoid.men/contact.html</link>
+      <guid>https://aryal.schizoid.men/contact.html</guid>
+      <pubDate>Wed, 06 May 2026 13:14:04 GMT</pubDate>
+      <description><![CDATA[aryal at schizoid dot men or \_ermermerm.np\_ at instagram]]></description>
+    </item>
+    <item>
+      <title>about</title>
+      <link>https://aryal.schizoid.men/about.html</link>
+      <guid>https://aryal.schizoid.men/about.html</guid>
+      <pubDate>Wed, 06 May 2026 13:13:26 GMT</pubDate>
+      <description><![CDATA[uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh]]></description>
+    </item>
+    <item>
+      <title>failed_transmission</title>
+      <link>https://aryal.schizoid.men/failed_transmission.html</link>
+      <guid>https://aryal.schizoid.men/failed_transmission.html</guid>
+      <pubDate>Sun, 03 May 2026 11:41:10 GMT</pubDate>
+      <description><![CDATA[# Failed Transmission *2026-04-10*]]></description>
+    </item>
+    <item>
+      <title>solving_it_the_convoluted_way</title>
+      <link>https://aryal.schizoid.men/solving_it_the_convoluted_way.html</link>
+      <guid>https://aryal.schizoid.men/solving_it_the_convoluted_way.html</guid>
+      <pubDate>Fri, 06 Feb 2026 21:04:22 GMT</pubDate>
+      <description><![CDATA[# solving it the convoluted way *2026-02-07* !2026-02-07_02-05-29.png]]></description>
+    </item>
+    <item>
+      <title>heaven_is_real_and_it_runs_on_a_microkernel</title>
+      <link>https://aryal.schizoid.men/heaven_is_real_and_it_runs_on_a_microkernel.html</link>
+      <guid>https://aryal.schizoid.men/heaven_is_real_and_it_runs_on_a_microkernel.html</guid>
+      <pubDate>Mon, 02 Feb 2026 21:49:41 GMT</pubDate>
+      <description><![CDATA[# heaven is real and it runs on a microkernel *2026-02-03*]]></description>
+    </item>
+    <item>
+      <title>how_AlphaGO_Zero_works</title>
+      <link>https://aryal.schizoid.men/how_AlphaGO_Zero_works.html</link>
+      <guid>https://aryal.schizoid.men/how_AlphaGO_Zero_works.html</guid>
+      <pubDate>Mon, 02 Feb 2026 20:06:18 GMT</pubDate>
+      <description><![CDATA[# how AlphaGO Zero works]]></description>
+    </item>
+    <item>
+      <title>windows_is_fucking_unusable</title>
+      <link>https://aryal.schizoid.men/windows_is_fucking_unusable.html</link>
+      <guid>https://aryal.schizoid.men/windows_is_fucking_unusable.html</guid>
+      <pubDate>Sun, 01 Feb 2026 19:58:45 GMT</pubDate>
+      <description><![CDATA[# windows is fucking unusable *2026-02-01*]]></description>
+    </item>
+    <item>
+      <title>magic_is_real_and_its_in_a_C_compiler</title>
+      <link>https://aryal.schizoid.men/magic_is_real_and_its_in_a_C_compiler.html</link>
+      <guid>https://aryal.schizoid.men/magic_is_real_and_its_in_a_C_compiler.html</guid>
+      <pubDate>Sun, 01 Feb 2026 19:43:21 GMT</pubDate>
+      <description><![CDATA[# magic is real and its in a C compiler *2026-02-02*]]></description>
+    </item>
+    <item>
+      <title>.md</title>
+      <link>https://aryal.schizoid.men/.md.html</link>
+      <guid>https://aryal.schizoid.men/.md.html</guid>
+      <pubDate>Sun, 01 Feb 2026 16:36:25 GMT</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title>projects</title>
+      <link>https://aryal.schizoid.men/projects.html</link>
+      <guid>https://aryal.schizoid.men/projects.html</guid>
+      <pubDate>Sun, 01 Feb 2026 16:34:45 GMT</pubDate>
+      <description><![CDATA[- [speaker_recog](speaker_recog): A system that lets you record audio, extract embeddings, and classify speakers in real-time - [tiny_diff](https://github.com/aryalaadi/tiny_diff): Tiny Diff is a smal]]></description>
+    </item>
+    <item>
+      <title>what_they_heard_of_yesterday</title>
+      <link>https://aryal.schizoid.men/what_they_heard_of_yesterday.html</link>
+      <guid>https://aryal.schizoid.men/what_they_heard_of_yesterday.html</guid>
+      <pubDate>Sun, 01 Feb 2026 16:33:48 GMT</pubDate>
+      <description><![CDATA[# dʰǵʰyésos *ḱlewénti (what they heard of yesterday)]]></description>
+    </item>
+    <item>
+      <title>solving_TicTacToe_with_MCTS</title>
+      <link>https://aryal.schizoid.men/solving_TicTacToe_with_MCTS.html</link>
+      <guid>https://aryal.schizoid.men/solving_TicTacToe_with_MCTS.html</guid>
+      <pubDate>Sun, 01 Feb 2026 16:33:42 GMT</pubDate>
+      <description><![CDATA[# solving TicTacToe with MCTS]]></description>
+    </item>
+    <item>
+      <title>the_decline_of_software_and_unix_as_solution</title>
+      <link>https://aryal.schizoid.men/the_decline_of_software_and_unix_as_solution.html</link>
+      <guid>https://aryal.schizoid.men/the_decline_of_software_and_unix_as_solution.html</guid>
+      <pubDate>Sun, 01 Feb 2026 15:25:54 GMT</pubDate>
+      <description><![CDATA[# the decline of software and unix as solution]]></description>
+    </item>
+  </channel>
+</rss>

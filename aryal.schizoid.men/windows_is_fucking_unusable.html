@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>windows_is_fucking_unusable</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .dead-link {
+            color: #cc0000;
+            font-style: italic;
+        }
+
+        .missing-image {
+            color: #cc6600;
+            font-style: italic;
+            background-color: #fff3cd;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .math-inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="/">Home</a></nav>
+    <main>
+        <h1 id="windows-is-fucking-unusable">windows is fucking unusable</h1>
+<p><em>2026-02-01</em></p>
+<p>Recently I got a new laptop, and after using Linux for more than 8 years, I thought I'd give windows another try. I managed to stay on windows for about a month before completely rage quitting. Frankly, modern windows is a train wreck of an operating system, everything from it's kernel design to the win32 api is a filthy mess. My first instinct was to rice my desktop, I had seen those occasional desktop threads where anons would post their windows desktop riced out with a fancy toolbar and a tiling window manager. After doing a bit of research I came across GlazeWM, initially it was pretty impressive, but the more I kept using it, the more I realized this is just an imitation of a real thing. It was just a hack job on top of a stupid operating system design choice from Microsoft. But I can ignore that, windows does have tiling built-in, I don't need an i3 imitation to feel good. I now want to rant about things that actually matter.</p>
+<h3 id="development-environments-are-a-nightmare">development environments are a nightmare</h3>
+<p>It feels borderline impossible trying to setup a non-visual studio development environment in windows, nothing wants to work, you'd think Bill Gates personally instructed my kernel to ensure my binaries are never linked correctly, its so fucking bad that for some reason when I tried to get started with a little raylib toy project, a bullet-hell platformer game I had in mind, the official library vendor gave me a fucking shell with the entire POSIX layer with a C compiler. Why the fuck should anyone have to do this? Well whatever who gives a shit, I get my C compiler and I get my library? What could possibly go wrong? Spoiler: Everything. The moment you need to get new libraries or install new software to your little isolated environment, it becomes painful to get anything done, am I supposed to spend fucking hours trying to just get my compiler to work or actually get my work done? And this is not a language specific thing, I know C/C++ has a reputation for poor tooling but working with other languages like Rust or Zig isn't a good experience either, at one point things became so bad that I had to start cross compiling to windows from WSL. Somehow that felt more reasonable and sane. Speaking about WSL, it also eats a boat load of ram for no good reason. Almost 10GB of my precious ram for running a django backend. </p>
+<h3 id="the-r-word-rm">the R word (r*m)</h3>
+<p>Lets talk about just how much memory windows leaks. I have 24GB ram on my laptop, and I literally never saw it go below 10 on windows, even on idle, and when I tried to get any work done, it starts to creep 20, this was a unacceptable for me, I think it is fucking insane that  my workflow on linux uses no more than 5-6GB ram but the same workflow takes 4 times as much on windows. The moment I fucking lost it was when my editor kept OOMing on me when all I had was a few browser tabs open and a few editor windows. My editor fucking died on me because it was OOM, I have never seen that happen, even on a 4GB laptop I had never faced something so atrocious. How is this legal? </p>
+<h3 id="so-what">so what?</h3>
+<p>All the banter and rants aside. 2026 is truly the year of linux desktop. </p>
+<p>I will probably keep appending to this, there is alot I could talk about, like specific win32 api functions that are genuinely braindead or screenshots of my windows terminal with 17 different shells because everything wants to install its own shell, git shipped with bash? gcc shipped with bash? your library shipped with bash? AHHHH HELP IM RUNNING OUT OF BASH I NEED MORE BASH I NEED MORE BASH. IM GOING TO FUCKING BASH YOUR HEAD. </p>
+<p>Anyways, i'm on arch now, I used void for the past 4 years but its becoming clear that the maintainers just cant keep up with the pace of projects like LLVM or even GCC. Void was an amazing distro but it feels like its about to drown in obsoletion. I feel like I finally have some room to breathe with my operating system when im on linux, I truly feel like I own my hardware. </p>
+<h2 id="all-my-steam-games-work-perfectly-fine-on-linux-thank-you-gabe">all my steam games work perfectly fine on linux, thank you Gabe!</h2>
+<p>Everything on my steam library works just fine, what more could I possibly ask?</p>
+    </main>
+    <footer>
+        <hr>
+        <p><small>Generated from an Obsidian vault</small></p>
+    </footer>
+</body>
+</html>

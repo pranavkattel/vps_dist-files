@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>how_AlphaGO_Zero_works</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .dead-link {
+            color: #cc0000;
+            font-style: italic;
+        }
+
+        .missing-image {
+            color: #cc6600;
+            font-style: italic;
+            background-color: #fff3cd;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .math-inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="/">Home</a></nav>
+    <main>
+        <h1 id="how-alphago-zero-works">how AlphaGO Zero works</h1>
+<p>The Key idea of AlphaGO Zero is to basically shoehorn a neural network into the MCTS value function. In <a href="solving_TicTacToe_with_MCTS.html">solving_TicTacToe_with_MCTS</a> I talked about how this plays out. The code gimmick in MCTS is we randomly sample until we have a decent idea on which node is most likely the better move, the case of TICTACTOE, the game is MCTS perfect, so it will always give the best move. </p>
+<p>The MCTS value function, UCT was defined as follows,<br />
+<div class="math-block">\[UCT = \frac{Q}{N} + c\sqrt{\frac{ln{N_p}}{N}}\]</div><br />
+the updated function is called PUCT, defined as the following,<br />
+<div class="math-block">\[PUCT = Q + c_\text{puct} \cdot P \cdot \frac{\sqrt{N_p}}{1 + N}
+\]</div></p>
+<p>By convention, this new formula's Q is already the mean</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> vannila MCTS 
+Q = Q_sum / N
+<span class="gh">#</span> PUCT convention 
+Q_new = (N_old * Q_old + v_leaf) / (N_old + 1)
+</code></pre></div>
+
+<p><span class="math-inline">\(c\)</span> still represents the same constant as before, but the new trick here is the <span class="math-inline">\(P\)</span></p>
+<h3 id="the-neural-network">The Neural Network</h3>
+<p>The code is of AlphaGo is there will be a neural network learning the evaluate position, it will take the current board state as input and spit out the policy and value, the policy will be used for compute <span class="math-inline">\(PUCT\)</span> while <span class="math-inline">\(v\)</span> will reveal the predicted game outcome. The game state will be the input, since we dont rely on <span class="dead-link">Heuristic</span> solutions, we need to provide the network as much as we can for it to work.</p>
+<p><strong>The neural network structure</strong></p>
+<ul>
+<li>
+<p><strong>shared feature extractor</strong></p>
+</li>
+<li>
+<p><strong>two output heads</strong>:</p>
+<ul>
+<li>
+<p>policy head → action probabilities</p>
+</li>
+<li>
+<p>value head → game outcome</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="input-shapes">Input Shapes</h4>
+<p>For the game of Baghchal let us construct a structure for the board. <br />
+<span class="math-inline">\([C,\;5,\;5]\)</span><br />
+Where <strong>C = number of feature planes</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Plane</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Tiger positions (1 where tiger exists)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Goat positions</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Player to move (1 = Tiger, 0 = Goat)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Phase flag (1 = placement, 0 = movement)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Goats remaining to place (normalized scalar plane)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="the-feature-extractor">The feature extractor</h4>
+<div class="codehilite"><pre><span></span><code><span class="nv">Input</span><span class="w"> </span>[<span class="nv">C</span>,<span class="mi">5</span>,<span class="mi">5</span>]
+<span class="nv">Conv2D</span><span class="ss">(</span><span class="mi">256</span>,<span class="w"> </span><span class="mi">3</span>×<span class="mi">3</span>,<span class="w"> </span><span class="nv">padding</span><span class="o">=</span><span class="nv">same</span><span class="ss">)</span>
+<span class="nv">BatchNorm</span>
+<span class="nv">ReLU</span>
+<span class="nv">Residual</span><span class="w"> </span><span class="nv">Block</span><span class="w"> </span>×<span class="w"> </span><span class="nv">N</span><span class="w"> </span><span class="ss">(</span><span class="nv">typically</span><span class="w"> </span><span class="mi">10</span>–<span class="mi">20</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">small</span><span class="w"> </span><span class="nv">boards</span><span class="ss">)</span>
+</code></pre></div>
+
+<p>So from Input-&gt;Convolution-&gt;Batch Normalization</p>
+<h4 id="residual-block">Residual block</h4>
+<p>This section will have more convolutions and batch normalizations. The output shape should be <span class="math-inline">\([256, 5, 5]\)</span></p>
+<h4 id="policy-and-value-heads">Policy and value heads</h4>
+<div class="codehilite"><pre><span></span><code>Conv2D(2, 1×1)
+BatchNorm
+ReLU
+Flatten
+Dense(|A|)
+</code></pre></div>
+
+<p>With this we finally get the policy. </p>
+<p>And value. </p>
+<div class="codehilite"><pre><span></span><code>Conv2D(1, 1×1)
+BatchNorm
+ReLU
+Flatten
+Dense(128)
+ReLU
+Dense(1)
+Tanh
+</code></pre></div>
+
+<p>The shared ResNet trunk will split into the policy and value head. now we run simulations with the MCTS and train this network and hope it learns to play the game.</p>
+<p>A visual representations of how the training flow happens. </p>
+<p><img src="Pasted image 20260202013141.png" alt="Pasted image 20260202013141.png" /></p>
+    </main>
+    <footer>
+        <hr>
+        <p><small>Generated from an Obsidian vault</small></p>
+    </footer>
+</body>
+</html>

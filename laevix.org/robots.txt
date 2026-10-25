@@ -1,0 +1,53 @@
+# Laevix - AI Tech Company Nepal - robots.txt
+# Website Development, AI Solutions, Custom Software
+# www.laevix.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /private/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 0
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.laevix.org/sitemap.xml
+Sitemap: https://www.laevix.org/sitemap-images.xml
+
+# Host preference (for international SEO)
+Host: https://www.laevix.org

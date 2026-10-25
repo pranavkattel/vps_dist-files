@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+# Sitemaps
+Sitemap: https://www.laevix.com/sitemap.xml
+Sitemap: https://www.laevix.com/sitemap-pages.xml
+Sitemap: https://www.laevix.com/sitemap-services.xml

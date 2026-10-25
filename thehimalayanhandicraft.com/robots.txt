@@ -1,0 +1,54 @@
+# robots.txt for The Himalayan Handicraft - Tsum Valley Buddhist Ritual Items
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /user/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /private/
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /user/
+Disallow: /cart
+Disallow: /checkout
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /user/
+Disallow: /cart
+Disallow: /checkout
+
+User-agent: Slurp
+Allow: /
+Disallow: /admin
+Disallow: /user/
+Disallow: /cart
+Disallow: /checkout
+
+# Crawl-delay for aggressive bots
+User-agent: Baiduspider
+Crawl-delay: 5
+
+User-agent: Yandex
+Crawl-delay: 5
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://thehimalayanhandicraft.com/sitemap.xml

@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Allow: /api/sitemap.xml
+Disallow: /contribute/edit/
+Disallow: /test-connection
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid*
+Disallow: /*?*gclid*
+Disallow: /*?*ref=*
+
+# Media crawlers — allow uploads for rich results
+User-agent: Googlebot-Image
+Allow: /uploads/
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://sarkari-kaam.laevix.org/sitemap.xml

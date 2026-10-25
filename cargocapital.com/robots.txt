@@ -1,0 +1,39 @@
+# Robots.txt for Capital Cargo - Best Cargo Company Nepal & Logistics Company Nepal
+# Optimized for search engines to crawl cargo and logistics services
+
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /about
+Allow: /contact
+Allow: /quote
+Allow: /tracking
+Allow: /faq
+Allow: /blog
+Disallow: /admin
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /backend/
+Disallow: /admin-panel
+Disallow: /admin-unified
+Disallow: /admin-tools
+Disallow: /admin-test
+Disallow: /test-api
+
+# Specific rules for Google - Best Cargo Company Nepal
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Crawl-delay: 0
+
+# Specific rules for Bing - Logistics Company Nepal
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Crawl-delay: 0
+
+# Sitemap location - Capital Cargo International Pvt. Ltd
+Sitemap: https://cargocapital.com/sitemap.xml
+
+# Host preference
+Host: https://cargocapital.com

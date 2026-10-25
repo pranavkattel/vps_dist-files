@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>magic is real and its in a C compiler</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="rss.xml">
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .dead-link {
+            color: #cc0000;
+            font-style: italic;
+        }
+        
+        .missing-image {
+            color: #cc6600;
+            font-style: italic;
+            background-color: #fff3cd;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 20px;
+            margin-left: 0;
+            color: #666;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .math-block {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .math-inline {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <nav><a href="/">Home</a></nav>
+    <main>
+        <h1 id="magic-is-real-and-its-in-a-c-compiler">magic is real and its in a C compiler</h1>
+<p><em>2026-02-02</em></p>
+<p>A while back I was obsessed with low level programming, I wrote my own little kernel that went nowhere and I learnt all kinds of assembly. During that phase, I learned that unless you are an <code>ffmpeg</code> dev there is no need for you to be hand rolling assembly. Modern compiler do some insane optimizations that seem incomprehensible, is it some kind of math trick or something specific to the hardware architecture? you never even know, but usually its a math trick.</p>
+<p>I really wanted to explore optimizations, and the end result was the I was somewhat able to write compiler grade assembly for a project euler problem, specifically the first one. The problem statement is quite simple. <br />
+<img src="Pasted image 20260202004840.png" alt="Pasted image 20260202004840.png" /></p>
+<p>even a novice should be able to solve this with much ease, all you do is check if it is a multiple of 3 or 5 and we add. </p>
+<pre class="codehilite"><code class="language-py">N = 1000
+sum = 0
+for i in range(N):
+    if i%3 == 0 or i%5 == 0:
+        sum+=i
+
+print(sum)
+</code></pre>
+
+<p>In human-grade assembly, the solution would look something like this:</p>
+<pre class="codehilite"><code>    .file   &quot;euler1.s&quot;
+    .text
+    .globl  main
+    .type   main, @function
+
+main:
+    pushq   %rbp
+    movq    %rsp, %rbp
+
+    xorl    %ecx, %ecx        # i = 0
+    xorl    %ebx, %ebx        # sum = 0
+
+.loop:
+    cmpl    $1000, %ecx
+    jge .done
+
+    # check i % 3 == 0
+    movl    %ecx, %eax
+    cdq
+    movl    $3, %esi
+    idivl   %esi
+    testl   %edx, %edx
+    je  .add
+
+    # check i % 5 == 0
+    movl    %ecx, %eax
+    cdq
+    movl    $5, %esi
+    idivl   %esi
+    testl   %edx, %edx
+    jne .next
+
+.add:
+    addl    %ecx, %ebx
+
+.next:
+    incl    %ecx
+    jmp .loop
+
+.done:
+    movl    %ebx, %eax        # return sum
+    popq    %rbp
+    ret
+</code></pre>
+
+<p>And while this may seem completely unreadable, for anyone familiar with the syntax and the CPU architecture, this bit of code is very intuitive. </p>
+<p><strong>what the assembly does</strong></p>
+<ul>
+<li><code>main:</code> it is the entry, what did you expect?</li>
+<li><code>pushq %rbp</code> and <code>movq %rsp, %rbp</code> to setup stack</li>
+<li><code>xorl</code> to initialize a variable to zero</li>
+<li><code>.loop:</code> implements a loop, <code>jge</code> for the end condition </li>
+<li><code>movl %ecx, %eax</code>, <code>cdq</code>,  and <code>idivl</code> compute the remainder: <br />
+        This is where the core of the program lies, you move <code>i</code> into <code>%eax</code>, then sign-extend for division, then you load the divisor into <code>%esi</code> and do your <code>idivl</code> which stores the remainder in <code>%edx</code></li>
+<li>we do this for both 5 and 3</li>
+<li>then we add and increment loop counter </li>
+<li>once its done, exit.</li>
+</ul>
+<p>This bit of assembly is very readable and  human-friendly, however if you wrote the equivalent C program and used a modern C compiler, you'd get something incomprehensible.</p>
+<p><strong>What is the GCC/Clang magic?</strong></p>
+<p>Well the first magic for me was how it avoids using <code>idiv</code> and uses a completely different approach to compute remainder. <code>idiv</code> is usually going to take 20-30 cycles on most modern CPUs, however a multiplication and a bit shift is nearly instant with 3-5 cycles. But how the fuck do we compute remainder with a multiplication and a shift instruction.  Well, like this:</p>
+<pre class="codehilite"><code>imulq $1431655766, %rax
+shrq  $32, %rax
+</code></pre>
+
+<p>That is a magic constant, for any constant divisor <code>d</code>, the compiler will compute a magic number, such that upon multiplication and shift by 32, it returns your quotient. </p>
+<pre class="codehilite"><code>magic = floor(2^32 / d)
+q ≈ (n * magic) &gt;&gt; 32
+</code></pre>
+
+<p>For some of you wizards this maybe basics of assembly optimizations, but for me this opened a whole new world of optimizations. It gets even more weird, it tries to squeeze out every bit of value. That was mostly it for the project euler problem but here are some other interesting optimizations I have come across. </p>
+<h3 id="the-even-divisor-magic-spell">The even divisor magic spell</h3>
+<p>Assume your C code has something like this:</p>
+<pre class="codehilite"><code>int q = n / 6;
+</code></pre>
+
+<p>The compiler will factor the divisor and rewrite it as </p>
+<pre class="codehilite"><code>q = (n / 3) &gt;&gt; 1;
+</code></pre>
+
+<p>and then we use the magic constant again to speed up</p>
+<pre class="codehilite"><code>magic_3 = floor(2^32 / 3) = 1431655766
+</code></pre>
+
+<p>In the end we get something much difficult to read, but also significantly faster: </p>
+<pre class="codehilite"><code>movsxd  %edi, %rax              # rax = n
+imulq   $1431655766, %rax, %rax # rax = n * magic_3
+shrq    $32, %rax               # rax ≈ n / 3
+sarl    $1, %eax                # rax = (n / 3) &gt;&gt; 1 = n / 6
+</code></pre>
+
+<p>I find it fascinating that compilers can go this far just for basic optimizations. </p>
+<p>Since I was so fascinated by this, I decided to look into the compiler source code to see how they did it. And I want to share you a <em>simple</em> snippet from <code>gcc/expmed.cc</code></p>
+<pre class="codehilite"><code class="language-c++">unsigned HOST_WIDE_INT
+choose_multiplier (unsigned HOST_WIDE_INT d, int n, int precision,
+                   unsigned HOST_WIDE_INT *multiplier_ptr,
+                   int *post_shift_ptr)
+{
+  int lgup, post_shift;
+  int pow1, pow2;
+
+  /* lgup = ceil(log2(d)) */
+  lgup = ceil_log2 (d);
+  gcc_assert (lgup &lt;= n);
+  gcc_assert (lgup &lt;= precision);
+
+  pow1 = n + lgup;
+  pow2 = n + lgup - precision;
+
+  /* mlow = 2^(n + lgup) / d */
+  wide_int val = wi::set_bit_in_zero (pow1,
+                                      HOST_BITS_PER_DOUBLE_INT);
+  wide_int mlow = wi::udiv_trunc (val, d);
+
+  /* mhigh = (2^(n + lgup) + 2^(n + lgup - precision)) / d */
+  val |= wi::set_bit_in_zero (pow2,
+                              HOST_BITS_PER_DOUBLE_INT);
+  wide_int mhigh = wi::udiv_trunc (val, d);
+
+  /* Reduce to lowest terms */
+  for (post_shift = lgup; post_shift &gt; 0; post_shift--)
+    {
+      unsigned HOST_WIDE_INT ml_lo
+        = wi::extract_uhwi (mlow, 1,
+                            HOST_BITS_PER_WIDE_INT);
+      unsigned HOST_WIDE_INT mh_lo
+        = wi::extract_uhwi (mhigh, 1,
+                            HOST_BITS_PER_WIDE_INT);
+      if (ml_lo &gt;= mh_lo)
+        break;
+      mlow = wi::uhwi (ml_lo,
+                       HOST_BITS_PER_DOUBLE_INT);
+      mhigh = wi::uhwi (mh_lo,
+                        HOST_BITS_PER_DOUBLE_INT);
+    }
+
+  *post_shift_ptr = post_shift;
+
+  if (n &lt; HOST_BITS_PER_WIDE_INT)
+    {
+      unsigned HOST_WIDE_INT mask
+        = (HOST_WIDE_INT_1U &lt;&lt; n) - 1;
+      *multiplier_ptr = mhigh.to_uhwi () &amp; mask;
+      return mhigh.to_uhwi () &gt; mask;
+    }
+  else
+    {
+      *multiplier_ptr = mhigh.to_uhwi ();
+      return wi::extract_uhwi (mhigh,
+                               HOST_BITS_PER_WIDE_INT,
+                               1);
+    }
+}
+</code></pre>
+
+<p><strong>What this magic spell is doing:</strong></p>
+<ul>
+<li>computing a fixed point approximation to <code>1/d</code></li>
+</ul>
+<pre class="codehilite"><code class="language-c">mlow  = 2^(n + lgup) / d
+mhigh = (2^(n + lgup) + 2^(n+lgup-precision)) / d
+</code></pre>
+
+<ul>
+<li>this is just shrinking the candidate range</li>
+</ul>
+<pre class="codehilite"><code class="language-c++">mlow &lt;= exact(2^(n+lgup) / d) &lt; mhigh
+</code></pre>
+
+<ul>
+<li>then it finds a multipler <code>m</code> and a right shift such that </li>
+</ul>
+<pre class="codehilite"><code class="language-c">x/d == (x * m) &gt;&gt; post_shift
+</code></pre>
+
+<p>This thing alone was pretty difficult for me to read through, I still dont understand how rest of the magic has been implemented, maybe the GNU coding standards are just ass making everything unreadable or maybe the compiler just implements advanced algorithms that I am unable to comprehend. Regardless, a modern C compiler is truly a marvel of human engineering. </p>
+    </main>
+    <footer>
+        <hr>
+        <p><small>Generated from an Obsidian vault</small></p>
+    </footer>
+</body>
+</html>
